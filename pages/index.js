@@ -6,6 +6,8 @@ import Header from '@/components/Header'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+  
+  
   return (
     <>
       <Head>
@@ -16,7 +18,12 @@ export default function Home() {
       </Head>
 
       <Header></Header>
+
+      
       <h1> Main Page</h1>
+      
+
+      
     </>
   )
 }
