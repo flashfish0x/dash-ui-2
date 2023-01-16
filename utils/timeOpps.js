@@ -1,6 +1,6 @@
 
 function toTimeStamp(time){
-	return new Date(time*1000).toLocaleString();
+	return new Date(time*1000).toLocaleDateString();
 }
 
 

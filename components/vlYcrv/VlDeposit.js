@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import BalanceGraphic from './BalanceGraphic';
 import { VlGeneralDetails } from '@/ethereum/vlRead';
 import useRPCProvider from '@/context/useRpcProvider';
+import CurvePools from './CurvePools';
 
 function VlDeposit() {
 
@@ -20,6 +21,8 @@ function VlDeposit() {
                 
 			
 		}catch{console.log('eth failed');}
+
+
 		
 	}, [defaultProvider]);
 
@@ -28,8 +31,7 @@ function VlDeposit() {
 	return (
 		<div>
 			{/*deposit box*/}
-			<div className='flex flex-col bg-slate-700 rounded-md p-5'> 
-				<div className='flex flex-row'>
+			<div className='flex flex-row'>
 					<div className='flex-auto'>{'Vl Stuff'}</div>
 					<div className='flex-auto'>
 				 		{'balance: ' + balance}
@@ -38,11 +40,16 @@ function VlDeposit() {
 
 					</div>
 				</div>
+			<div className='flex flex-col bg-slate-700 rounded-md p-5'> 
+				
 
 				{generalVl && <BalanceGraphic vlBasics={generalVl} />}
-				
+
+
+				 
 				
 			</div>
+			<CurvePools />
 		</div>
 	)
 }
