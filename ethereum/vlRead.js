@@ -33,7 +33,7 @@ async function VlGeneralDetails(defaultProvider){
 	for(let i=0; i < resultsArray.length; i++){
 		res = resultsArray[i].returnValues[0];
 		if(i == 0){
-			vlGen.nextPeriod = ethers.BigNumber.from(res);
+			vlGen.nextPeriod = ethers.BigNumber.from(res).toNumber();
 		}
 		
 	}

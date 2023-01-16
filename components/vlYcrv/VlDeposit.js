@@ -28,17 +28,19 @@ function VlDeposit() {
 	return (
 		<div>
 			{/*deposit box*/}
-			<div className='flex flex-row bg-slate-700 rounded-md p-5'> 
-				<div>
-				{'Vl Stuff'}
-				<div>
-				 {'balance: ' + balance}
+			<div className='flex flex-col bg-slate-700 rounded-md p-5'> 
+				<div className='flex flex-row'>
+					<div className='flex-auto'>{'Vl Stuff'}</div>
+					<div className='flex-auto'>
+				 		{'balance: ' + balance}
 
-				 {balance && <BalanceGraphic vl_position={vl_position} />}
+				 
 
+					</div>
 				</div>
 
-				</div>
+				{generalVl && <BalanceGraphic vlBasics={generalVl} />}
+				
 				
 			</div>
 		</div>
