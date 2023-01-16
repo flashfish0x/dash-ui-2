@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import Header from '@/components/Header'
+import VlDeposit from '@/components/vlYcrv/vlDeposit'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,7 +21,11 @@ export default function Home() {
       <Header></Header>
 
       
-      <h1> Main Page</h1>
+      
+      <section className='max-w-7xl mx-auto px-8 sm:px-16'>
+        <h1> Main Page</h1>
+        <VlDeposit></VlDeposit>
+      </section>
       
 
       
