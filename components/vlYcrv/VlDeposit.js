@@ -76,13 +76,13 @@ function VlDeposit({curveGauges}) {
 			</div>}
 			<div className='grid grid-cols-4 text-black'>
 				<div className=''>
-				<button className='m-auto rounded-sm p-2 bg-slate-100' onClick={() => setTest(test_users[0])}>{'test one'}</button></div>
+				<button className='shadow m-auto rounded-sm p-2 hover:bg-slate-200 bg-slate-100' onClick={() => setTest(test_users[0])}>{'Sim User1'}</button></div>
 				<div className=''>
-				<button className='bg-slate-100 p-2 rounded-sm' onClick={() => setTest(test_users[1])}>{'test two'}</button></div>
+				<button className='shadow bg-slate-100 p-2 hover:bg-slate-200 rounded-sm' onClick={() => setTest(test_users[1])}>{'Sim User2'}</button></div>
 				<div>
-				<button className='bg-slate-100 p-2 rounded-sm' onClick={() => setTest(test_users[2])} >{'test three'}</button></div>
+				<button className='shadow bg-slate-100 p-2 hover:bg-slate-200 rounded-sm' onClick={() => setTest(test_users[2])} >{'Sim User3'}</button></div>
 				<div>
-				<button className='bg-slate-100 p-2 rounded-sm' onClick={() => setTest(test_users[3])}>{'test test'}</button></div>
+				<button className='shadow bg-slate-100 p-2 hover:bg-slate-200 rounded-sm' onClick={() => setTest(test_users[3])}>{'Sim User4'}</button></div>
 			</div>
 			</div>
 
