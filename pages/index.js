@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import Header from '@/components/Header'
-import VlDeposit from '@/components/vlYcrv/vlDeposit'
+import VlDeposit from '@/components/vlYcrv/VlDeposit'
 
 const inter = Inter({ subsets: ['latin'] })
 
