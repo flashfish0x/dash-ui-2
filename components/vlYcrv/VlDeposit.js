@@ -4,6 +4,7 @@ import { VlGeneralDetails } from '@/ethereum/vlRead';
 import useRPCProvider from '@/context/useRpcProvider';
 import CurvePools from './CurvePools';
 import { toTimeStamp } from '@/utils/timeOpps';
+import CurveDepositWithdraw from './CurveDepositWithdraw';
 
 function VlDeposit({curveGauges}) {
 
@@ -30,7 +31,7 @@ function VlDeposit({curveGauges}) {
 	}, {
 		balance: 200_000,
 		votesSpent: 200_000,
-		lastVoteTime: nowTime - oneWeeks*4,
+		lastVoteTime: nowTime - oneWeeks*2,
 		unlockTime: endTime,
 		name: 'user2'
 	},{
@@ -71,7 +72,7 @@ function VlDeposit({curveGauges}) {
 			<div className='border-dashed m-2 p-2 text-black rounded-sm bg-red-200 '>
 			<div>{'Testing'}</div>
 			{test && <div>
-				{`currently testing: ${test.name}, balance: ${test.balance}, votesSpent: ${toTimeStamp(test.votesSpent)}, lastVoteTime: ${toTimeStamp( test.lastVoteTime)}, unlockTime: ${toTimeStamp(test.unlockTime)},`}
+				{`currently testing: ${test.name}, balance: ${test.balance}, votesSpent: ${test.votesSpent}, lastVoteTime: ${toTimeStamp( test.lastVoteTime)}, unlockTime: ${toTimeStamp(test.unlockTime)},`}
 			</div>}
 			<div className='grid grid-cols-4 text-black'>
 				<div className=''>
@@ -104,6 +105,7 @@ function VlDeposit({curveGauges}) {
 				 
 				
 			</div>
+			{test && <CurveDepositWithdraw user={test} />}
 			{test && <CurvePools curveGauges={curveGauges} user={test}/>}
 		</div>
 	)

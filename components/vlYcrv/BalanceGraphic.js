@@ -61,7 +61,7 @@ function BalanceGraphic({vlBasics, user}) {
                     
                 </div>
 
-                {user.lastVoteTime > lastPeriod && <div className='absolute flex -ml-7 flex-col h-20 z-10' style={{left:`100%`}}>
+                {user.lastVoteTime > lastPeriod - twoWeeks && <div className='absolute flex -ml-7 flex-col h-20 z-10' style={{left:`${user.lastVoteTime > lastPeriod ? 100 : 50}%`}}>
                     <div className='m-auto w-14'>{'When you can withdraw'}
                     </div>
                     <div className='flex grow  hover:bg-red-400 -mb-1 w-0.5  bg-green-700 m-auto'></div>
@@ -136,7 +136,7 @@ function BalanceGraphic({vlBasics, user}) {
                         
                     </div>
 
-                    {user.lastVoteTime > lastPeriod && <div className='absolute flex -ml-7 flex-col h-20 z-10' style={{left:`100%`}}>
+                    {user.lastVoteTime > lastPeriod- twoWeeks && <div className='absolute flex -ml-7 flex-col h-20 z-10' style={{left:`${user.lastVoteTime > lastPeriod ? 100 : 50}`}}>
                         
                         <div className='flex grow  hover:bg-red-400  w-0.5  bg-green-700 m-auto'></div>
                         
