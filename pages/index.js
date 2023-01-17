@@ -23,7 +23,7 @@ export default function Home({curveGauges}) {
       
       
       <section className='max-w-7xl mx-auto px-8 sm:px-16'>
-        <h1> Main Page</h1>
+        
         <VlDeposit curveGauges={curveGauges}></VlDeposit>
       </section>
       
@@ -35,8 +35,16 @@ export default function Home({curveGauges}) {
 
 export async function getStaticProps() {
   
-  const curveGauges = await fetch('https://api.curve.fi/api/getAllGauges?blockchainId=ethereum').then(res => res.json())
+  const unfiltered = await fetch('https://api.curve.fi/api/getAllGauges?blockchainId=ethereum').then(res => res.json())
   
+  
+
+  const curveGauges = Object.values(unfiltered.data).map(x => {
+    return {gauge: x.gauge,
+    shortName: x.shortName,
+    name: x.name}})
+  // console.log(curveGauges)
+
   return {
       props: {
       curveGauges

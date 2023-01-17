@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import {ArrowDownIcon, ArrowUpIcon} from '@heroicons/react/24/outline'
 import { toTimeStamp } from '@/utils/timeOpps';
 
-function BalanceGraphic({vlBasics}) {
+function BalanceGraphic({vlBasics, user}) {
 
 
     const nowTime = Date.now() / 1000;
@@ -15,6 +15,18 @@ function BalanceGraphic({vlBasics}) {
     // console.log(lastPeriod)
 
     const elapsed = 100* (nowTime - lastPeriod)/(2*twoWeeks)
+    let lastVoteElapsed
+    if(user){
+        
+        lastVoteElapsed = 100*(nowTime - user.lastVoteTime)/(2*twoWeeks)
+    }
+    // let lastVoteElapsed = useRef("");
+    console.log(lastVoteElapsed)
+    // useEffect(() => {
+       
+
+    // }), [user];
+    
 
     
     // const elapsed = 1
@@ -24,7 +36,7 @@ function BalanceGraphic({vlBasics}) {
     <div className='flex flex-col py-4 grow mr-6'>
         <div className='relative ml-20 text-xs text-center m:ml-24 h-20'> 
             <div className='relative'>
-                {vlBasics.lastVote && <div className='absolute flex -ml-7 flex-col h-20 z-10' style={{left:`10%`}}>
+                {user.lastVoteTime > lastPeriod && <div className='absolute flex -ml-7 flex-col h-20 z-10' style={{left:`${lastVoteElapsed}%`}}>
                     <div className='m-auto w-14'>{'Your Last Vote'}
                     </div>
                     <div className='flex grow  hover:bg-red-400 -mb-1 w-0.5  bg-green-700 m-auto'></div>
@@ -49,13 +61,13 @@ function BalanceGraphic({vlBasics}) {
                     
                 </div>
 
-                <div className='absolute flex -ml-7 flex-col h-20 z-10' style={{left:`100%`}}>
+                {user.lastVoteTime > lastPeriod && <div className='absolute flex -ml-7 flex-col h-20 z-10' style={{left:`100%`}}>
                     <div className='m-auto w-14'>{'When you can withdraw'}
                     </div>
                     <div className='flex grow  hover:bg-red-400 -mb-1 w-0.5  bg-green-700 m-auto'></div>
                     <ArrowDownIcon className='w-8 h-8 m-auto text-green-700'></ArrowDownIcon>
                     
-                </div>
+                </div>}
                     
                 </div>
 
@@ -99,11 +111,11 @@ function BalanceGraphic({vlBasics}) {
                         
                     </div>
 
-                    {vlBasics.lastVote && <div className='absolute flex -ml-7 flex-col h-20 z-10' style={{left:`10%`}}>
+                    {user.lastVoteTime > lastPeriod && <div className='absolute flex -ml-7 flex-col h-10 z-10' style={{left:`${lastVoteElapsed}%`}}>
                         
                         <div className='flex grow  hover:bg-red-400  w-0.5  bg-green-700 m-auto'></div>
                         
-                        <div className='m-auto w-14'>{'lv'}</div>
+                        <div className='m-auto w-14'>{toTimeStamp(user.lastVoteTime)}</div>
                         
                     </div>}
                     
@@ -124,13 +136,13 @@ function BalanceGraphic({vlBasics}) {
                         
                     </div>
 
-                    <div className='absolute flex -ml-7 flex-col h-20 z-10' style={{left:`100%`}}>
+                    {user.lastVoteTime > lastPeriod && <div className='absolute flex -ml-7 flex-col h-20 z-10' style={{left:`100%`}}>
                         
                         <div className='flex grow  hover:bg-red-400  w-0.5  bg-green-700 m-auto'></div>
                         
                         <div className='m-auto w-14'>{toTimeStamp(finalPeriod)}</div>
                         
-                    </div>
+                    </div>}
                     
                 </div>
 
