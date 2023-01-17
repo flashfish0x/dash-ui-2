@@ -86,6 +86,8 @@ function VlDeposit({curveGauges}) {
 			</div>
 			</div>
 
+			
+
 			{/*deposit box*/}
 			<div className='flex m-4 flex-row'>
 					<div className='flex-auto'>{'Vl-yCRV'}</div>
