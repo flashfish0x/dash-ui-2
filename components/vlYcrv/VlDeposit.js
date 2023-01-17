@@ -4,7 +4,7 @@ import { VlGeneralDetails } from '@/ethereum/vlRead';
 import useRPCProvider from '@/context/useRpcProvider';
 import CurvePools from './CurvePools';
 
-function VlDeposit() {
+function VlDeposit({curveGauges}) {
 
 	const {defaultProvider} = useRPCProvider();
 	let [generalVl, setGeneralVl] = useState([]);
@@ -49,7 +49,7 @@ function VlDeposit() {
 				 
 				
 			</div>
-			<CurvePools />
+			<CurvePools curveGauges={curveGauges}/>
 		</div>
 	)
 }

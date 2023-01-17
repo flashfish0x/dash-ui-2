@@ -6,7 +6,7 @@ import VlDeposit from '@/components/vlYcrv/vlDeposit'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home() {
+export default function Home({curveGauges}) {
   
   
   return (
@@ -24,11 +24,23 @@ export default function Home() {
       
       <section className='max-w-7xl mx-auto px-8 sm:px-16'>
         <h1> Main Page</h1>
-        <VlDeposit></VlDeposit>
+        <VlDeposit curveGauges={curveGauges}></VlDeposit>
       </section>
       
 
       
     </>
   )
+}
+
+export async function getStaticProps() {
+  
+  const curveGauges = await fetch('https://api.curve.fi/api/getAllGauges?blockchainId=ethereum').then(res => res.json())
+  
+  return {
+      props: {
+      curveGauges
+  },
+  revalidate: 600
+}
 }
