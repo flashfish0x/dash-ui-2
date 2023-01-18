@@ -1,12 +1,12 @@
 import React from 'react'
 
-function firestoreTest() {
+function FirestoreTest() {
   return (
     <div>firestoreTest</div>
   )
 }
 
-export default firestoreTest
+export default FirestoreTest
 // import React from 'react'
 // import {collection, addDoc} from "firebase/firestore"
 // import { fireDB } from '@/firebase/firebaseApp'
