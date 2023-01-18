@@ -69,7 +69,7 @@ function SearchTx({hash}) {
             {Object.keys(abi.filters).filter(y=>y.includes('(')).map(x => <button className='p-2 m-2 shadow-md rounded-md bg-slate-400 hover:bg-slate-800 flex' key={x} onClick={()=>searchEvents(x)}> {x} </button>)}
             </div>
             <div className='flex-col'>  <div>{'results'}</div>
-            {event && event.map((ev) => <div className='p-4'> {JSON.stringify(ev)}</div>)}
+            {event && event.map((ev) => <div key={JSON.stringify(ev)} className='p-4'> {JSON.stringify(ev)}</div>)}
             
             </div>
             </div>
