@@ -35,7 +35,7 @@ import { fireDB } from '@/firebase/firebaseApp'
 export default async function handler(req, res) {
   // console.log(checkTx(req.body))
   const address = req.body.replace(/\"/g, "")
-  console.log(address)
+  // console.log(address)
 
   const checksummed = checkTx(address)
   
@@ -47,16 +47,17 @@ export default async function handler(req, res) {
     res.status(500).json({ message: 'not an address'}); 
   }else{
     const etherkey = process.env.REACT_APP_ETHERSCAN_API
-    console.log(etherkey)
+    // console.log(etherkey)
 
     const s = await getDoc(doc(fireDB, "abis", checksummed))
     let abi = s.data()
-    console.log(abi)
+    // console.log(abi)
     
     if(!abi){
+      console.log('Calling etherscan')
       const url = `https://api.etherscan.io/api?module=contract&action=getabi&address=${checksummed}&apikey=${etherkey}`
       const s = await fetch(url).then(res => res.json())
-      console.log(s)
+      // console.log(s)
 
       if(s.status === '1'){
         await setDoc(doc(collection(fireDB, "abis"), checksummed), {abi: s.result});
@@ -66,6 +67,7 @@ export default async function handler(req, res) {
       }
 
     }else{
+      console.log('Found in db')
       abi = abi.abi
     }
 
