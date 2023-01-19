@@ -4,7 +4,7 @@ const {ethers} = require('ethers');
 
 let all = [];
 
-async function EventSearch(contract, defaultProvider, filterName){
+async function EventSearch(contract, defaultProvider, filterName, f, t){
 
     // console.log(filterName)
     contract = contract.connect(defaultProvider)
@@ -15,7 +15,8 @@ async function EventSearch(contract, defaultProvider, filterName){
     
 
     let filter = contract.filters[filterName]();
-    filter.fromBlock = 13435386
+    filter.fromBlock = f
+    filter.toBlock = t-1
     // console.log(filter)
 
     let answer = await defaultProvider.getLogs(filter)
