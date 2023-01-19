@@ -49,26 +49,30 @@ export default async function handler(req, res) {
     const etherkey = process.env.REACT_APP_ETHERSCAN_API
     // console.log(etherkey)
 
-    const s = await getDoc(doc(fireDB, "abis", checksummed))
+    const s = await getDoc(doc(fireDB, "contracts", checksummed))
     let abi = s.data()
     // console.log(abi)
     
     if(!abi){
       console.log('Calling etherscan')
-      const url = `https://api.etherscan.io/api?module=contract&action=getabi&address=${checksummed}&apikey=${etherkey}`
-      const s = await fetch(url).then(res => res.json())
+      // const url = `https://api.etherscan.io/api?module=contract&action=getabi&address=${checksummed}&apikey=${etherkey}`
+      // const s = await fetch(url).then(res => res.json())
       // console.log(s)
 
-      if(s.status === '1'){
-        await setDoc(doc(collection(fireDB, "abis"), checksummed), {abi: s.result});
-        abi = s.result
+      const url2 = `https://api.etherscan.io/api?module=contract&action=getsourcecode&address=${checksummed}&apikey=${etherkey}`
+      const source = await fetch(url2).then(res => res.json())
+      console.log(source.result)
+      console.log(source.result[0].ABI)
+      if(source.status === '1'){
+        await setDoc(doc(collection(fireDB, "contracts"), checksummed), source.result[0]);
+        abi = source.result[0].ABI
       }else{
-        res.status(500).json({ message: s.result}); 
+        res.status(500).json({ message: source.result}); 
       }
 
     }else{
       console.log('Found in db')
-      abi = abi.abi
+      abi = abi.ABI
     }
 
    

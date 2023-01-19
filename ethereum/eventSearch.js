@@ -2,12 +2,48 @@
 
 const {ethers} = require('ethers');
 
-let all = [];
+/*
+    speed up ideas 
+    batch https://geth.ethereum.org/docs/interacting-with-geth/rpc/batch
+
+*/
+
+async function StorageStuff(defaultProvider, hash){
+    console.log('asd')
+
+    let handled = {}
+    //let s = await defaultProvider.send("debug_traceBlockByNumber", [16435333, "{}"])
+    let s = await defaultProvider.send("debug_storageRangeAt", 
+        ['0x48a7d14c3de82653491009c88c1392b47426e57050c15f4754b2ef54c78041e5',
+        0, 
+        hash, 
+        '0x0000000000000000000000000000000000000000', 
+        10000])
+    
+    s = Object.values(s.storage).sort((a,b) => a.key.localeCompare(b.key))
+
+    for(let slot of s ){
+        // console.log(slot)
+        slot.hashedKey = ethers.utils.keccak256(slot.key)
+    }
+
+    for(let slot of s ){
+        if(s.find(element => slot.hashedKey == element.key )){
+            slot.type = 'Array'
+        }
+    }
+
+
+    console.log(s)
+    return s
+}
 
 async function EventSearch(contract, defaultProvider, filterName, f, t){
 
+    
+
     // console.log(filterName)
-    contract = contract.connect(defaultProvider)
+    
    
 
     // const x = new ethers.providers.Filter()
@@ -103,5 +139,6 @@ async function EventSearch(contract, defaultProvider, filterName, f, t){
 }   
 
 export {
-    EventSearch
+    EventSearch,
+    StorageStuff
 }
