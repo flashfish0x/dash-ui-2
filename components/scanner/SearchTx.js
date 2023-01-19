@@ -1,10 +1,11 @@
 import useRpcProvider from '@/context/useRpcProvider';
-import { EventSearch } from '@/ethereum/eventSearch';
+import { EventSearch, StorageStuff } from '@/ethereum/eventSearch';
 import { JsonRpcBatchProvider } from '@ethersproject/providers'
 import { ethers } from 'ethers';
 import React, { useEffect, useState } from 'react'
 import {ArrowPathIcon} from '@heroicons/react/24/outline'
 import { nearestBlocks } from '@/utils/timeOpps';
+import StorageSearch from './StorageSearch';
 
 function SearchTx({hash}) {
 
@@ -17,6 +18,8 @@ function SearchTx({hash}) {
     const [to, setTo] = useState(new Date())
     const [loading, setLoading] = useState(false)
     const {defaultProvider} = useRpcProvider()
+
+    
     
 
     useEffect(() => {
@@ -46,7 +49,9 @@ function SearchTx({hash}) {
 
         
         }, [hash]);
+    
 
+    
     function searchEvents(eventName){
         setLoading(true)
 
@@ -73,12 +78,7 @@ function SearchTx({hash}) {
     <div className='mt-3'>
         <h1>{`Searching ${hash}`}</h1>       
         
-        <div className='m-4 flex'> 
-            <div className='mx-2'>{'from:'}</div><input className='text-black' onChange={(e) => { 
-                console.log('whie', e); 
-                setFrom(new Date(e.target.value))}} type="date" value={from.toISOString().split('T')[0]} />
-            <div className='mx-2'>{'to:'}</div><input className='text-black' onChange={(e) => setTo(new Date(e.target.value))} type="date" value={to.toISOString().split('T')[0]} />
-        </div>
+        
         {/* <div className="flex items-center justify-center">
             <div className="datepicker relative form-floating mb-3 xl:w-96">
                 <input type="text"
@@ -97,9 +97,21 @@ function SearchTx({hash}) {
           </div>
         }
         {abi.filters  && !loading && 
-        
+            
+            
+            
             <div className='p-4'>
+                <StorageSearch hash={hash} />
+                
                 <h1 className='flex p-2 text-4xl'> {'Events'}</h1>
+                <div className='m-4 flex'> 
+            <div className='mx-2'>{'from:'}</div><input className='text-black' onChange={(e) => { 
+                console.log('whie', e); 
+                setFrom(new Date(e.target.value))}} type="date" value={from.toISOString().split('T')[0]} />
+            <div className='mx-2'>{'to:'}</div><input className='text-black' onChange={(e) => setTo(new Date(e.target.value))} type="date" value={to.toISOString().split('T')[0]} />
+        </div>
+                 
+                
                 <div className=''>
                 <div className='p-4 flex-col'>
             {Object.keys(abi.filters).filter(y=>y.includes('(')).map(x => <button className='p-2 m-2 shadow-md rounded-md bg-slate-400 hover:bg-slate-800 flex' key={x} onClick={()=>searchEvents(x)}> {x} </button>)}
