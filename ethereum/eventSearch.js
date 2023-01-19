@@ -19,8 +19,8 @@ async function EventSearch(contract, defaultProvider, filterName){
     // console.log(filter)
 
     let answer = await defaultProvider.getLogs(filter)
-    console.log(contract.interface.events[filterName])
-    console.log(contract.interface)
+    // console.log(contract.interface.events[filterName])
+    // console.log(contract.interface)
     // console.log(filter.topics)
     console.log(answer)
     let decoded = []
@@ -31,7 +31,7 @@ async function EventSearch(contract, defaultProvider, filterName){
         
         // const dec = contract.interface.decodeEventLog(contract.interface.events[filterName], top.data, filter.topics)
         const dec = contract.interface.parseLog(top)
-        console.log(dec)
+        // console.log(dec)
        
         let a2 = {
             transactionHash: top.transactionHash,
@@ -50,7 +50,7 @@ async function EventSearch(contract, defaultProvider, filterName){
 
     
 
-    console.log(contract.interface)
+    // console.log(contract.interface)
     
     return decoded
 	// 	//console.log(func);
