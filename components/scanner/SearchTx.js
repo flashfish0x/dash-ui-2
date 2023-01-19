@@ -101,7 +101,7 @@ function SearchTx({hash}) {
             
             
             <div className='p-4'>
-                <StorageSearch hash={hash} />
+                <StorageSearch hash={hash} setLoading={setLoading} />
                 
                 <h1 className='flex p-2 text-4xl'> {'Events'}</h1>
                 <div className='m-4 flex'> 
