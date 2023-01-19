@@ -104,7 +104,7 @@ function SearchTx({hash}) {
                 <div className='p-4 flex-col'>
             {Object.keys(abi.filters).filter(y=>y.includes('(')).map(x => <button className='p-2 m-2 shadow-md rounded-md bg-slate-400 hover:bg-slate-800 flex' key={x} onClick={()=>searchEvents(x)}> {x} </button>)}
             </div>
-            <div className='flex-col max-h-screen w-auto overflow-x-hidden overflow-y-auto'>  <div>{'Results' }</div>
+            <div className='flex-col max-h-screen w-auto overflow-x-hidden overflow-y-auto'>  <div>{ event.length + ' Results' }</div>
             {event && event.sort((a,b) =>  b.blockNumber - a.blockNumber ).map((ev, index) => <div key={index + 'out'} className='p-4'> 
             <div className='grid border-2 rounded-md grid-cols-4'>
                 <div className='p-1 border-2 col-span-1'>{'tx hash:'}</div><div className='p-1 border-2 col-span-3'>{ev.transactionHash}</div>
