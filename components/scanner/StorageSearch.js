@@ -7,9 +7,9 @@ function StorageSearch({hash, setLoading}) {
     
     const [storage, setStorage] = useState([])
 
-    // useEffect(() => {
-    //     setStorage([])
-    // }, [hash]);
+    useEffect(() => {
+        setStorage([])
+    }, [hash]);
 
     console.log(storage)
     function searchStorage(e) {
