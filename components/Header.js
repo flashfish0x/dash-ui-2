@@ -4,7 +4,7 @@ function Header() {
   return (
     <header className='sticky top-0 z-50 grid grid-cols-3 shadow-md py-5'>
         <div>
-            Seabeam
+            echolocation
         </div>
         <div>
         </div>
