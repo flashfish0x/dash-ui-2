@@ -4,7 +4,7 @@ const {ethers} = require('ethers');
 
 let all = [];
 
-async function EventSearch(contract, defaultProvider, filterName){
+async function EventSearch(contract, defaultProvider, filterName, f, t){
 
     // console.log(filterName)
     contract = contract.connect(defaultProvider)
@@ -15,12 +15,13 @@ async function EventSearch(contract, defaultProvider, filterName){
     
 
     let filter = contract.filters[filterName]();
-    filter.fromBlock = 13435386
+    filter.fromBlock = f
+    filter.toBlock = t-1
     // console.log(filter)
 
     let answer = await defaultProvider.getLogs(filter)
-    console.log(contract.interface.events[filterName])
-    console.log(contract.interface)
+    // console.log(contract.interface.events[filterName])
+    // console.log(contract.interface)
     // console.log(filter.topics)
     console.log(answer)
     let decoded = []
@@ -31,17 +32,18 @@ async function EventSearch(contract, defaultProvider, filterName){
         
         // const dec = contract.interface.decodeEventLog(contract.interface.events[filterName], top.data, filter.topics)
         const dec = contract.interface.parseLog(top)
-        console.log(dec)
+        // console.log(dec)
        
         let a2 = {
+            eventName: filterName,
             transactionHash: top.transactionHash,
             blockNumber: top.blockNumber,
             results: []
         }
 
         for (var i = 0; i < dec.args.length; i++) {
-            console.log(dec.args[i])
-            a2.results.push(dec.eventFragment.inputs[i].name + ": " + dec.args[i] )
+            // console.log(dec.args[i])
+            a2.results.push([dec.eventFragment.inputs[i].name, dec.args[i] ])
         }   
         
         // console.log(a2)
@@ -50,7 +52,7 @@ async function EventSearch(contract, defaultProvider, filterName){
 
     
 
-    console.log(contract.interface)
+    // console.log(contract.interface)
     
     return decoded
 	// 	//console.log(func);
