@@ -22,13 +22,16 @@ async function EventSearch(contract, defaultProvider, filterName){
     console.log(contract.interface.events[filterName])
     console.log(contract.interface)
     // console.log(filter.topics)
-    // console.log(answer)
+    console.log(answer)
     let decoded = []
     for(const top of answer){
         // console.log(top)
         //const a2 = {decoded: contract.interface.parseLog(top),
 
-        const dec = contract.interface.decodeEventLog(contract.interface.events[filterName], top.data, filter.topics)
+        
+        // const dec = contract.interface.decodeEventLog(contract.interface.events[filterName], top.data, filter.topics)
+        const dec = contract.interface.parseLog(top)
+        console.log(dec)
        
         let a2 = {
             transactionHash: top.transactionHash,
@@ -36,9 +39,9 @@ async function EventSearch(contract, defaultProvider, filterName){
             results: []
         }
 
-        for (var i = 0; i < dec.length; i++) {
-            console.log(dec[i])
-            a2.results.push(contract.interface.events[filterName].inputs[i].name + ": " + dec[i] )
+        for (var i = 0; i < dec.args.length; i++) {
+            console.log(dec.args[i])
+            a2.results.push(dec.eventFragment.inputs[i].name + ": " + dec.args[i] )
         }   
         
         // console.log(a2)
