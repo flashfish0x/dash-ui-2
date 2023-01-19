@@ -34,14 +34,15 @@ async function EventSearch(contract, defaultProvider, filterName){
         // console.log(dec)
        
         let a2 = {
+            eventName: filterName,
             transactionHash: top.transactionHash,
             blockNumber: top.blockNumber,
             results: []
         }
 
         for (var i = 0; i < dec.args.length; i++) {
-            console.log(dec.args[i])
-            a2.results.push(dec.eventFragment.inputs[i].name + ": " + dec.args[i] )
+            // console.log(dec.args[i])
+            a2.results.push([dec.eventFragment.inputs[i].name, dec.args[i] ])
         }   
         
         // console.log(a2)
