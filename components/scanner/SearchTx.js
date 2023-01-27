@@ -10,6 +10,7 @@ import StorageSearch from './StorageSearch';
 function SearchTx({hash}) {
 
     const [abi, setAbi] = useState({})
+    const [storages, setStorages] = useState({})
 
     const [event, setEvents] = useState([])
 
@@ -36,8 +37,12 @@ function SearchTx({hash}) {
                 // 
                 console.log(r)
                 
-                const abb = new ethers.Contract(hash, r.message)
-                // console.log(abb)
+                const abb = new ethers.Contract(hash, r.message.abi)
+                console.log(r.message.storages)
+                if(r.message.storages && Object.keys(r.message.storages).length > 0){
+                    setStorages(JSON.parse(r.message.storages))
+                }
+                
                 setAbi(abb)
                 setErrors("")
             }).catch((error) => {
@@ -101,7 +106,7 @@ function SearchTx({hash}) {
             
             
             <div className='p-4'>
-                <StorageSearch hash={hash} setLoading={setLoading} />
+                <StorageSearch hash={hash} setLoading={setLoading} storages={storages} />
                 
                 <h1 className='flex p-2 text-4xl'> {'Events'}</h1>
                 <div className='m-4 flex'> 
