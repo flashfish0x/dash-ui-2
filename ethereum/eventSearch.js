@@ -33,15 +33,31 @@ async function StorageStuff(defaultProvider, hash){
         }
     }
 
+    let comb = s.map(x => x.value.substring(2)).join('')
+    console.log(comb)
+    let zeros = (comb.match(/0/g) || []).length
+    let total = comb.length
+
+    console.log(100* zeros/total + "% of the storage slots in this contract are zeros")
+
+
 
     console.log(s)
+    
     return s
 }
 
 async function EventSearch(contract, defaultProvider, filterName, f, t){
 
     
-
+    /*filter = {
+    address: tokenAddress,
+    topics: [
+        utils.id("Transfer(address,address,uint256)"),
+        null,
+        hexZeroPad(myAddress, 32)
+    ]
+};/*/
     // console.log(filterName)
     
    
